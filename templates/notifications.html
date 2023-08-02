@@ -1,0 +1,53 @@
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" />
+{% endblock %} 
+
+{% block content %} {% if messages %}
+<div class="container" style="background: rgb(195, 240, 247); max-width: 250px; border-style:none">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      {% for message in messages %}
+      <div class="notification" style="">
+        <span class="message">{{ message }}</span>
+        <button class="close-btn">&times;</button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock %} {% block extra_scripts %}
+<script>
+  const closeButtons = document.querySelectorAll(".close-btn");
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const notification = button.parentNode;
+      notification.remove();
+    });
+  });
+</script>
+{% endblock %} {% comment %} {% if messages %}
+<div
+  class="container"
+  style="width: 500px; margin: 0 auto; margin-right: 500px"
+>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      {% for message in messages %}
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %} {% endcomment %}
